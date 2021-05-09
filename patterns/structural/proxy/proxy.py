@@ -16,13 +16,13 @@ class HardService(HardServiceInterface):
 
 class ServiceOptimizer(HardServiceInterface):
     def __init__(self, service: HardService):
-        self.__service = service
+        self._service = service
 
     def execute(self):
         if self.__check_access():
             self.__start_connection_with_service()
             self.__optimize_execution()
-            self.__service.execute()
+            self._service.execute()
             self.__close_connection_with_service()
 
     def __start_connection_with_service(self):

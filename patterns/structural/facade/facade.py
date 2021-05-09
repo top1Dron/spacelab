@@ -20,17 +20,17 @@ class Service4:
 
 class Facade:
     def __init__(self):
-        self.__service1 = Service1()
-        self.__service2 = Service2()
-        self.__service3 = Service3()
-        self.__service4 = Service4()
+        self._service1 = Service1()
+        self._service2 = Service2()
+        self._service3 = Service3()
+        self._service4 = Service4()
 
     def execute(self):
         print('Start of services execution')
-        self.__service1.execute()
-        self.__service3.execute()
-        self.__service2.execute()
-        self.__service4.execute()
+        self._service1.execute()
+        self._service3.execute()
+        self._service2.execute()
+        self._service4.execute()
         print('End of services execution')
 
 
