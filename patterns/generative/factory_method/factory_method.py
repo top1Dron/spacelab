@@ -65,7 +65,6 @@ class RectangleFactory(ShapeFactory):
 
 
 if __name__ == '__main__':
-    shapes = QuadrateFactory()
     if dt.now().minute & 1:
         factory = QuadrateFactory()
     else:

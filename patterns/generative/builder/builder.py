@@ -1,7 +1,18 @@
 from abc import ABCMeta, abstractmethod
+from typing import  Any
 
 
 class Builder(metaclass=ABCMeta):
+
+    def __init__(self):
+        self.reset()
+
+    def reset(self) -> 'Product':
+        self._product = Product()
+
+    @property
+    def product(self):
+        return self._product
 
     @abstractmethod
     def add_first_element(self):
@@ -19,31 +30,43 @@ class Builder(metaclass=ABCMeta):
 class ConcreteBuilder1(Builder):
 
     def add_first_element(self):
-        self.__first_element = '1 concrete builder - first element'
+        self._product.add('Part1-CB1')
         return self
 
     def add_second_element(self):
-        self.__second_element = '1 concrete builder - second element'
+        self._product.add('Part2-CB1')
         return self
 
     def add_third_element(self):
-        self.__third_element = '1 concrete builder - third element'
+        self._product.add('Part3-CB1')
         return self
 
 
 class ConcreteBuilder2(Builder):
 
     def add_first_element(self):
-        self.__first_element = '2 concrete builder - first element'
+        self._product.add('Part1-CB2')
         return self
 
     def add_second_element(self):
-        self.__second_element = '2 concrete builder - second element'
+        self._product.add('Part2-CB2')
         return self
 
     def add_third_element(self):
-        self.__third_element = '2 concrete builder - third element'
+        self._product.add('Part3-CB2')
         return self
+
+
+class Product:
+    def __init__(self):
+        self._parts = []
+
+    def add(self, part: Any) -> None:
+        self._parts.append(part)
+
+    @property
+    def parts(self):
+        return f"Product parts: {', '.join(self._parts)}"
 
 
 class Director:
@@ -58,8 +81,12 @@ class Director:
 
 
 if __name__ == '__main__':
-    director = Director(ConcreteBuilder1())
-    print(director.build_first_obj().__dict__)
+    builder1 = ConcreteBuilder1()
+    director = Director(builder1)
+    director.build_first_obj()
+    print(builder1.product.parts)
 
-    director = Director(ConcreteBuilder2())
-    print(director.build_second_obj().__dict__)
+    builder2 = ConcreteBuilder2()
+    director = Director(builder2)
+    director.build_second_obj()
+    print(builder2.product.parts)
